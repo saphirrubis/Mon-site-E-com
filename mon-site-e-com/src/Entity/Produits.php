@@ -20,9 +20,6 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $type = null;
-
     #[ORM\Column]
     private ?float $prix = null;
 
@@ -31,6 +28,19 @@ class Produits
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\Column]
+    private bool $online = false;
+
+    #[ORM\Column(length: 255)]
+    private ?string $attachement = null;
+
+    #[ORM\ManyToOne(inversedBy: 'produits')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CategoryShop $category = null;
 
     public function getId(): ?int
     {
@@ -57,18 +67,6 @@ class Produits
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -105,6 +103,54 @@ class Produits
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function isOnline(): bool
+    {
+        return $this->online;
+    }
+
+    public function setOnline(bool $online): self
+    {
+        $this->online = $online;
+
+        return $this;
+    }
+
+    public function getAttachement(): ?string
+    {
+        return $this->attachement;
+    }
+
+    public function setAttachement(string $attachement): self
+    {
+        $this->attachement = $attachement;
+
+        return $this;
+    }
+
+    public function getCategory(): ?CategoryShop
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?CategoryShop $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

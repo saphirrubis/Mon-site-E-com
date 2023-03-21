@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Produits;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitsController extends AbstractController
 {
-    #[Route('/produits', name: 'app_produits')]
+    #[Route('/boutique', name: 'shop_index')]
+    public function __construct( private readonly EntityManagerInterface $em){}
     public function index(): Response
     {
-        return $this->render('produits/index.html.twig', [
-            'controller_name' => 'ProduitsController',
-        ]);
+        $prod = $this->em->getRepository(Produits::class)->findAll();
+
+        return $this->render('produits/index.html.twig',['prod'=> $prod ]);
+
     }
 }

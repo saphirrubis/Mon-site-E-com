@@ -11,11 +11,9 @@
         {% block javascripts %}
             {# {{ encore_entry_script_tags('app') }} #}
         {% endblock %}
+        {% include "_partials/_flash.html.twig" %} 
     </head>
     <body>
-       {# {% nav item in items %}
-            
-        {% endnav %} #}
         {% block body %}
     
         {% endblock %}

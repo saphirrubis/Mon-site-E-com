@@ -19,7 +19,8 @@ class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, 
-    EntityManagerInterface $entityManager, MailerService $mailerService, TokenGeneratorInterface $tokenGeneratorInterface): Response
+    EntityManagerInterface $entityManager, MailerService $mailerService, 
+    TokenGeneratorInterface $tokenGeneratorInterface): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);

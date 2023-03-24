@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\ProduitsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
+#[Vich\Uploadable]
 class Produits
 {
     #[ORM\Id]
@@ -35,8 +38,12 @@ class Produits
     #[ORM\Column]
     private bool $online = false;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $attachement = null;
+
+    #[Vich\UploadableField( mapping:"product_attachements", fileNameProperty: "attachement")]
+    private ?File $attachementFile = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
@@ -141,6 +148,17 @@ class Produits
         $this->attachement = $attachement;
 
         return $this;
+    }
+    public function getAttachementFile()
+    {
+        return $this->attachementFile;
+    }
+    public function setAttachementFile(File $attachementFile = null)
+    {
+        $this->attachementFile = $attachementFile;
+        if (null !== $attachementFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     public function getCategory(): ?CategoryShop

@@ -10,7 +10,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProduitsCrudController extends AbstractCrudController
 {
@@ -26,7 +28,8 @@ class ProduitsCrudController extends AbstractCrudController
             AssociationField::new('category'),
             TextEditorField::new('description'),
             BooleanField::new('online'),
-            TextField::new('attachement'),
+            ImageField::new('attachement')->setBasePath('/uploads/attachements')->onlyOnIndex(),
+            TextField::new('attachementFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
             MoneyField::new('prix')->setCurrency('EUR'),
             DateField::new('createdAt'),
         ];

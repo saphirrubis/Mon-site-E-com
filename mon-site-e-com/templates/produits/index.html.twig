@@ -8,8 +8,11 @@
 {% for produits in prod %}
     
 <h1>{{ produits.nom }} </h1>
+{# <img src:{{ produits.attachement}} alt:{{produits.nom}}> #}
+<p> {{produits.description}}</p>
 <strong>{{ produits.prix }}</strong>
-<p> {{ produits.description}}</p>
+<br>
+<a herf="#">Ajouter au panier</a>
 <hr>
 {% endfor %}
 

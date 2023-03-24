@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        product_attachements:
+            uri_prefix: '%produits_attachements%'
+            upload_destination: '%kernel.project_dir%/public%produits_attachements%'
+            namer: 'Vich\UploaderBundle\Naming\UniqidNamer'
+            delete_on_update: false
+            delete_on_remove: false

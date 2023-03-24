@@ -1,5 +1,12 @@
 {
   "dependencies": {
     "maildev": "^2.0.5"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.18.6",
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-react": "file:vendor/symfony/ux-react/assets",
+    "react": "^18.0",
+    "react-dom": "^18.0"
   }
 }

@@ -11,13 +11,8 @@ class CategoryShopFixture extends Fixture
     public function load(ObjectManager $manager)
     {
       $c=[
-                  1=>['name'=>'Homme','slug'=>'Homme'],
-                  2=>['name'=>'Femme','slug'=>'Femme'],
-                  3=>['name'=>'Enfant','slug'=>'Enfant'],
-                  4=>['name'=>'Maison','slug'=>'Maison'],
-                  5=>['name'=>'Accesoires','slug'=>'Accesoires'],
-                  6=>['name'=>'Animaux','slug'=>'Animaux'],
-                  7=>['name'=>'Autres','slug'=>'Autres'],
+                  1=>['name'=>'Vétement','slug'=>'Vétement'],
+              
       ];
       foreach($c as $k =>$value){
                   $categoryShop = new CategoryShop();

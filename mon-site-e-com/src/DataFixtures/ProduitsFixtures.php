@@ -14,7 +14,7 @@ class ProduitsFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
      // create 150 produits
-     for ($i = 0; $i < 150; $i++) {
+     for ($i = 0; $i < 10; $i++) {
                   $category= $this->getReference('categoryShop-'. $faker->numberBetween(1,6));
                   $product = new Produits();
                   $product->setNom($faker->sentence);

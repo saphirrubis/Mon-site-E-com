@@ -10,9 +10,10 @@
 <h1>{{ produits.nom }} </h1>
 {# <img src:{{ produits.attachement}} alt:{{produits.nom}}> #}
 <p> {{produits.description}}</p>
-<strong>{{ produits.prix }}</strong>
+<strong>{{( produits.prix /100)|number_format(2,',','.')}}€</strong>
 <br>
-<a herf="#">Ajouter au panier</a>
+<a href="{{ path('cart_add', {id: produits.id}) }}">Ajouter au panier</a>
+
 <hr>
 {% endfor %}
 

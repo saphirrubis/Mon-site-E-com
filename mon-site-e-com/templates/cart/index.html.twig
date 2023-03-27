@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier
+{% endblock %}
+{% block body %}
+   <main>
+     {% if cart|length >0 %}
+	<div>
+	     <div>
+	         <div>
+	            <h2>Mon panier</h2>
+		<p>Ajouter d'autres produits disponible sur le site <a href="{{path('shop_index')}}"> boutique</a> .</p>
+                                    <a href="{{ path('cart_removeAll') }}">Supprimer tous mon panier</a>
+                                     {% set total = null %}                  
+                                     {% for item in cart %}
+                                     {% set total = total + (item.produit.prix * item.quantity) %}
+		         <div>
+		            <a href="#"><img src="{{asset('uploads/attachements/642144ab6378e983439874.jpg"')}}"></a>
+		              <div>
+		                  <div>
+			   <div>
+			     <h3><a href="#">{{item.produit.nom }}</a></h3>
+			   </div>
+			   <div>
+			     <div>{{(total/100)|number_format(2,',','.')}}€</div>
+			   </div>
+		                  </div>
+		                  <div>
+			    <a href="{{ path('cart_decrease',{id: item.produit.id}) }}">-</a>
+			     <input type="number" value="{{item.quantity}}" readonly>
+			    <a href="{{ path('cart_add', {id: item.produit.id }) }}">+</a>
+			    </div>
+			     <a href="{{ path('cart_remove',{id: item.produit.id}) }}">Supprimer</a>
+			    <div>
+			</div> 
+		              </div>
+		         </div>
+		 {% endfor %}
+                                    <ul>
+                                    <li>
+                                         Nombre de produit: <span>{{cart|length}}</span>
+                                     </li>
+                                     </ul> 
+                                <div>Total:<span>{{(total/100)|number_format(2,',','.')}}</span> €</div>
+                                <button type:'submit'>Valider le panier</button>
+	         </div>
+	     </div>
+	</div>
+
+          {% else %}
+              <div>
+	<div>
+                       <h1>Votre panier est vide</h1>
+                       <p>Commencez votre shopping des maintenant à travers nos articles.</p>
+                       <a href="{{ path('shop_index')}}">Voir les produits.</a>
+	</div>
+            </div>
+
+
+     {% endif %}
+
+   </main>
+
+{% endblock %}
+
+

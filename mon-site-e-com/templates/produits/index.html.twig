@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProduitsController!{% endblock %}
+{% block title %}Nos produits{% endblock %}
 
 {% block body %}
-<h1>Mes produits </h1>
-
+<h1>Nos produits </h1>
+<br>
 {% for produits in prod %}
-    
+
+<img src='uploads/attachements/{{produits.attachement}}' alt={{produits.nom}}>  
+
 <h1>{{ produits.nom }} </h1>
-{# <img src:{{ produits.attachement}} alt:{{produits.nom}}> #}
+
 <p> {{produits.description}}</p>
+
 <strong>{{( produits.prix /100)|number_format(2,',','.')}}€</strong>
 <br>
 <a href="{{ path('cart_add', {id: produits.id}) }}">Ajouter au panier</a>

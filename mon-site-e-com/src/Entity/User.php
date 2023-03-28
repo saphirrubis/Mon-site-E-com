@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use DateTime;
 use DateInterval;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -52,11 +54,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isverified = false;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]
+    private Collection $addresses;
+
     public function __construct()
     {
         $this->createdAt =new DateTime('now');
         $this->isverified = false;
         $this->tokenRegistrationLifeTime =(new DateTime('now'))->add(new DateInterval("P7D"));
+        $this->addresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -185,6 +191,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsverified(bool $isverified): self
     {
         $this->isverified = $isverified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Address>
+     */
+    public function getAddresses(): Collection
+    {
+        return $this->addresses;
+    }
+
+    public function addAddress(Address $address): self
+    {
+        if (!$this->addresses->contains($address)) {
+            $this->addresses->add($address);
+            $address->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAddress(Address $address): self
+    {
+        if ($this->addresses->removeElement($address)) {
+            // set the owning side to null (unless already changed)
+            if ($address->getUser() === $this) {
+                $address->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -5,24 +5,25 @@
 {% block body %}
    <main>
      {% if cart|length >0 %}
-	<div>
+         <div>
+	<form  action="{{ path('order_index')}}">
 	     <div>
 	         <div>
 	            <h2>Mon panier</h2>
 		<p>Ajouter d'autres produits disponible sur le site <a href="{{path('shop_index')}}"> boutique</a> .</p>
                                     <a href="{{ path('cart_removeAll') }}">Supprimer tous mon panier</a>
-                                     {% set total = null %}                  
+                                     {% set total = null %}
                                      {% for item in cart %}
                                      {% set total = total + (item.produit.prix * item.quantity) %}
 		         <div>
-		            <a href="#"><img src="{{asset('uploads/attachements/642144ab6378e983439874.jpg"')}}"></a>
+		            <a href="#"><img src="uploads/attachements/{{item.produit.attachement}}"></a>
 		              <div>
 		                  <div>
 			   <div>
 			     <h3><a href="#">{{item.produit.nom }}</a></h3>
 			   </div>
 			   <div>
-			     <div>{{(total/100)|number_format(2,',','.')}}€</div>
+			     <div>{{((item.produit.prix * item.quantity)/100)|number_format(2,',','.')}}€</div>
 			   </div>
 		                  </div>
 		                  <div>
@@ -45,7 +46,8 @@
                                 <button type:'submit'>Valider le panier</button>
 	         </div>
 	     </div>
-	</div>
+	</form>
+         </div>
 
           {% else %}
               <div>

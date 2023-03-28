@@ -13,7 +13,6 @@ class CartController extends AbstractController
     #[Route('/Mon-panier', name: 'cart_index')]
     public function index(CartService $cartService): Response
     {
-       
         return $this->render('cart/index.html.twig',['cart'=>$cartService->getTotal()]);
     }
     #[Route('/Mon-panier/add/{id<\d+>}', name: 'cart_add')]

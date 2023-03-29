@@ -5,19 +5,19 @@
 {% block body %}
    <main>
      {% if cart|length >0 %}
-         <div>
+         <div class="container-panier">
 	<form  action="{{ path('order_index')}}">
 	     <div>
-	         <div>
-	            <h2>Mon panier</h2>
+	     
+	            <h2>Votre panier</h2>
 		<p>Ajouter d'autres produits disponible sur le site <a href="{{path('shop_index')}}"> boutique</a> .</p>
                                     <a href="{{ path('cart_removeAll') }}">Supprimer tous mon panier</a>
                                      {% set total = null %}
                                      {% for item in cart %}
                                      {% set total = total + (item.produit.prix * item.quantity) %}
-		         <div>
-		            <a href="#"><img src="uploads/attachements/{{item.produit.attachement}}"></a>
-		              <div>
+		         <div class='grid1' >
+		            <a  href="#"><img src="uploads/attachements/{{item.produit.attachement}}" class="img-centre"></a>
+		              <div class="prod-quantite">
 		                  <div>
 			   <div>
 			     <h3><a href="#">{{item.produit.nom }}</a></h3>
@@ -27,9 +27,9 @@
 			   </div>
 		                  </div>
 		                  <div>
-			    <a href="{{ path('cart_decrease',{id: item.produit.id}) }}">-</a>
+			    <a href="{{ path('cart_decrease',{id: item.produit.id}) }}" class='moin'>-</a>
 			     <input type="number" value="{{item.quantity}}" readonly>
-			    <a href="{{ path('cart_add', {id: item.produit.id }) }}">+</a>
+			    <a href="{{ path('cart_add', {id: item.produit.id }) }}" class='plus'>+</a>
 			    </div>
 			     <a href="{{ path('cart_remove',{id: item.produit.id}) }}">Supprimer</a>
 			    <div>
@@ -37,20 +37,21 @@
 		              </div>
 		         </div>
 		 {% endfor %}
-                                    <ul>
+		<div class="totaux">
+                                    <ul class='ul'>
                                     <li>
                                          Nombre de produit: <span>{{cart|length}}</span>
                                      </li>
                                      </ul> 
-                                <div>Total:<span>{{(total/100)|number_format(2,',','.')}}</span> €</div>
-                                <button type:'submit'>Valider le panier</button>
-	         </div>
+                                <div class='ul2'>Total: <span>{{(total/100)|number_format(2,',','.')}}</span> €</div>
+                                <button type:'submit' class='btn2'>Valider le panier</button>
+	     
 	     </div>
 	</form>
          </div>
 
           {% else %}
-              <div>
+              <div class="panier-vide">
 	<div>
                        <h1>Votre panier est vide</h1>
                        <p>Commencez votre shopping des maintenant à travers nos articles.</p>

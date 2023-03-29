@@ -3,21 +3,26 @@
 {% block title %}Nos produits{% endblock %}
 
 {% block body %}
+<main class="produits">
 <h1>Nos produits </h1>
 <br>
+<div class='container-produit'>
 {% for produits in prod %}
 
+<div class='content-produit'>
 <img src='uploads/attachements/{{produits.attachement}}' alt={{produits.nom}}>  
 
-<h1>{{ produits.nom }} </h1>
+<h2>{{ produits.nom }} </h2>
 
-<p> {{produits.description}}</p>
+<p class="desc"> {{produits.description}}</p>
 
 <strong>{{( produits.prix /100)|number_format(2,',','.')}}€</strong>
 <br>
 <a href="{{ path('cart_add', {id: produits.id}) }}">Ajouter au panier</a>
+</div>
 
-<hr>
+{# <hr> #}
 {% endfor %}
-
+</div>
+</main>
 {% endblock %}

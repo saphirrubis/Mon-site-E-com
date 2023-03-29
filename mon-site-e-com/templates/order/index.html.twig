@@ -3,60 +3,61 @@
 {% block title %}Création de la commande{% endblock %}
 
 {% block body %}
- <div></div>
+<div class="val">
 
-<div><div><div> 
-    <nav>
-        <ol>
-            <li><a href='#'>Accueil</a></li>
-            <li><a href='#'>Boutique</a></li>
-            <li>Création de la commande</li>
-        </ol>
-    </nav>
     {# {action:path('order_prepare')} #}
     {{ form_start(form) }}
+     <div class="grid2"> 
+    <section class='accueil'>
     <h1>Création de la commande</h1>
+   
     <h3>Détail du shopping</h3>
     <p>Si vous n'avezpas d'adresse ajouter sur votre compte <a href="#">ajouter une adresse.</a> </p>
+       </section>
+    <section class='ad1'>
     <h3>Choisir votre livraison</h3>
     {{ form_row(form.addresses)|replace({'[-br]': '<br/>'})|raw}}
+    </section>
+      <section class='ad2'>
     <h3>Mode livraison</h3>
     {{ form_row(form.transporter)|replace({'[-br]': '<br/>'})|raw}} 
+    </section>
 </div>
 <div>
-<h2>Récap <span>({{ recapCart|length}} produits)</span></h2> 
- {% set total = null %}
+<h2>Récapitulation de votre commande : <span>{{ recapCart|length}} produits</span></h2> 
+{% set total = null %}
 {% for prod in recapCart %}
-  {% set total = total + (prod.produit.prix * prod.quantity) %}
-<div>
-<img src="../uploads/attachements/{{prod.produit.attachement}}" alt="{{prod.produit.description }}">
-  <div>
-      <div>
-	<div>
-		  <h3><a href="#">{{prod.produit.nom }}</a></h3>
-	 </div>
-		<div>
-	  <div>{{((prod.produit.prix * prod.quantity)/100)|number_format(2,',','.')}}€</div>
-	</div>
-	           </div>
-	           <div>
-	 <a href="{{ path('cart_decrease',{id: prod.produit.id}) }}">-</a>
-	  <input type="number" value="{{prod.quantity}}" readonly>
-	 <a href="{{ path('cart_add', {id: prod.produit.id }) }}">+</a>
-	 </div>
-	  <a href="{{ path('cart_remove',{id: prod.produit.id}) }}">Supprimer</a>
-	 <div>
-</div> 
-	</div>
-</div>  
+{% set total = total + (prod.produit.prix * prod.quantity) %}
+ <div class='grid1' >
+	 <a  href="#"><img src="../uploads/attachements/{{prod.produit.attachement}}" alt="{{prod.produit.description}}" class="img-centre"></a>
+		              <div class="prod-quantite">
+		                  <div>
+			   <div>
+			     <h3><a href="#">{{prod.produit.nom }}</a></h3>
+			   </div>
+			   <div>
+			     <div>{{((prod.produit.prix * prod.quantity)/100)|number_format(2,',','.')}}€</div>
+			   </div>
+		                  </div>
+		                  <div>
+			    <a href="{{ path('cart_decrease',{id: prod.produit.id}) }}" class='moin'>-</a>
+			     <input type="number" value="{{prod.quantity}}" readonly>
+			    <a href="{{ path('cart_add', {id: prod.produit.id }) }}" class='plus'>+</a>
+			    </div>
+			     <a href="{{ path('cart_remove',{id: prod.produit.id}) }}">Supprimer</a>
+			    <div>
+			</div> 
+		              </div>
+		         </div>
 {% endfor %}  
-
-<div>Total:<span>{{(total/100)|number_format(2,',','.')}}</span> €.</div>
+ <section class='total-panier-val'> 
+<div>Total:  <span>{{(total/100)|number_format(2,',','.')}} </span> €.</div>
 </div> 
 <div>
-    <button type:'submit'>Valider le panier</button>
+    <button type:'submit' class="btn3">Valider le panier</button>
 </div>
 </div>
+</section>
 {{ form_end(form)}}
 </div> 
 {% endblock %}

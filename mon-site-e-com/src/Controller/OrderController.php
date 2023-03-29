@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class OrderController extends AbstractController
 {
-    #[Route('/order/create', name: 'order_index')]
+    #[Route('/order', name: 'order_index')]
     public function index(CartService $cartService): Response
     {
         if(!$this->getUser()){

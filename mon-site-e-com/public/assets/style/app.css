@@ -1,0 +1,197 @@
+ *, ::before, ::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: whitesmoke;
+}
+img{
+    width: 250px; 
+    height: 300px;
+}
+h1{
+    text-align: center;
+    font-size: 3em;
+    padding-top: 0,5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.alert{
+    text-align: center;
+    font-size: 2.2em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h2{
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 1em;
+}
+p, a{
+padding: 1em;
+}
+h3{
+    text-align: center;
+    text-decoration: underline;
+}
+ul{
+ list-style-type: none;
+}
+ /*pages produits  */
+ .produits{
+    text-align: center;
+ }
+ .container-produit{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 2.5em;
+ }
+ .content-produit{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2.5em 1.5em 5em 1.5em ;
+    padding: 2em;
+    border: 1.5px solid black;
+ }
+ .desc{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+ }
+/* inscrisption */
+.inscription{
+    text-align: center;
+}
+.form-inscrire{
+    text-align: center;
+    padding: 2em;
+    border: 2px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.btn, label, input{
+    margin: 0.8em;
+}
+/* connexion */
+.login{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3em;
+}
+/* panier */
+.container-panier, .val{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    justify-content: center;
+    justify-items: center;
+    padding: 4em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    border: 2px solid black;
+}
+.grid1{
+display: grid;
+grid-template-columns: 2fr;
+grid-template-rows: 2fr;
+
+}
+.prod-quantite{
+ grid-row: 1;
+ grid-column: 2;
+}
+.img-centre{
+ width: 8vw; 
+ height: 12vh;
+}
+.moin{
+    text-decoration: solid;
+    color: red;
+}
+.plus{
+    text-decoration: solid;
+    color:blue
+}
+.totaux{
+    display: grid;
+grid-template-columns: 2fr;
+grid-template-rows: 1fr;   
+}
+.ul{
+    grid-row: 1;
+}
+.ul2{
+    grid-column: 2;
+}
+.btn2{
+    grid-row: 2;
+    grid-column: 2;
+    margin: 2em;
+    text-align: center;
+}
+.panier-vide{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw; 
+    height:20vh ;
+    padding: 2em;
+    border: 1.5px solid black;
+    background-color: antiquewhite;
+    border-radius: 50%;
+}
+/* validation de panier */
+.val {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    justify-content: center;
+    justify-items: center;
+    padding: 4em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: whitesmoke;
+    border: 2px solid black;
+}
+.grid2{
+    display: grid;
+    grid-template-columns: 3fr;
+    grid-template-rows: 3fr; 
+    margin-bottom: 2em;
+}
+.accueil{
+    grid-row: 1;
+    grid-column: 1/3;
+}
+.ad1{
+    grid-row: 2;
+    grid-column: 1/2;
+}
+.ad2{
+    grid-row: 2;
+    grid-column: 2/3;
+}
+.total-panier-val{
+    text-align: right;
+    text-decoration: double;
+}
+.btn3{
+    position: relative;
+    left: 15vw;
+   
+}

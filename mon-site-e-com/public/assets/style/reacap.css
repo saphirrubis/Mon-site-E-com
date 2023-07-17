@@ -1,0 +1,22 @@
+*,
+::before,
+::after {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+}
+.grid3{
+                  display: grid;
+                  grid-template-columns: 2fr;
+                  grid-template-rows: 1fr;
+              }
+              .ad1b{
+                  grid-row: 1;
+                  grid-column: 1;
+                  text-align: center;
+              }
+              .ad2b{
+                  grid-row: 1;
+                  grid-column: 2;
+                  text-align: center;
+              }

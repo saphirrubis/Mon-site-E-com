@@ -4,9 +4,7 @@
 
 {% block body %}
 <div class="val">
-
-    {# {action:path('order_prepare')} #}
-    {{ form_start(form) }}
+    {{ form_start(form, {action:path('order_prepare')}) }}
      <div class="grid2"> 
     <section class='accueil'>
     <h1>Création de la commande</h1>
@@ -16,7 +14,7 @@
        </section>
     <section class='ad1'>
     <h3>Choisir votre livraison</h3>
-    {{ form_row(form.addresses)|replace({'[-br]': '<br/>'})|raw}}
+    {{ form_row(form.addresses)|replace({'[-br]': '<br/>'})|raw}} 
     </section>
       <section class='ad2'>
     <h3>Mode livraison</h3>

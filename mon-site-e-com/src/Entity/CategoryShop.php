@@ -2,12 +2,28 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryShopRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use App\Repository\CategoryShopRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CategoryShopRepository::class)]
+#[ApiResource(
+    operations: [
+                new Get(normalizationContext: ['groups' => 'recherche:produit']),
+                new GetCollection(normalizationContext: ['groups' => 'rechercher:category'])
+            ],
+            order: ['createdAt' => 'DESC'],
+            paginationEnabled: false,
+        )]
+#[ApiFilter(SearchFilter::class, properties: ['recherche' => 'exact'])]
+
 class CategoryShop
 {
     #[ORM\Id]
@@ -16,12 +32,14 @@ class CategoryShop
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['recherche:category'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produits::class)]
+    #[Groups(['recherche:category', 'recherche:produit'])]
     private Collection $produits;
 
     public function __toString(){

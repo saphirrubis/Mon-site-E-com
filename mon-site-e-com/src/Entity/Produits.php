@@ -2,14 +2,29 @@
 
 namespace App\Entity;
 
-use App\Repository\ProduitsRepository;
+use ApiPlatform\Metadata\Get;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\ProduitsRepository;
+use ApiPlatform\Metadata\GetCollection;
 use Symfony\Component\HttpFoundation\File\File;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
 #[Vich\Uploadable]
+#[ApiResource(
+    operations: [
+               new Get(normalizationContext: ['groups' => 'read:prod','recherche:produit']),
+               new GetCollection(normalizationContext: ['groups' => 'read:detail'])
+    ],
+    order: ['year' => 'DESC', 'city' => 'ASC'],
+    paginationEnabled: false,
+)]
+#[ApiFilter(SearchFilter::class, properties: ['recherche' => 'exact'])]
 class Produits
 {
     #[ORM\Id]
@@ -18,27 +33,33 @@ class Produits
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['read:prod', 'read:detail' , 'recherche:produit'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:detail','recherche:produit'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['read:prod', 'read:detail'])]
     private ?float $prix = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['read:detail'])]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:prod', 'read:detail'])]
     private ?string $slug = null;
 
     #[ORM\Column]
     private bool $online = false;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:prod', 'read:detail'])]
     private ?string $attachement = null;
 
     #[Vich\UploadableField( mapping:"product_attachements", fileNameProperty: "attachement")]
@@ -47,6 +68,7 @@ class Produits
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read:prod', 'read:detail'])]
     private ?CategoryShop $category = null;
 
     public function getId(): ?int

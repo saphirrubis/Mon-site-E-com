@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de votre commande{% endblock %}
+
+{% block body %}
+<main class='recap'>
+<h1 >Vérification de la commande</h1>
+<section class="grid3">
+<div class="ad1b">
+ <h3>Les Détails d'expédition:</h3>
+   <input type='radio' name='shopping' checked>
+    <label>
+    <span>{{transporter.nom}}</span>
+    <span>{{transporter.content}}</span>
+    <span>{{((transporter.prix)/ 100)|number_format(2,',','.')}} €</span>
+    </label>
+    </div>
+     <div class="ad2b">
+ <h3>L'adresse pour la livraison :</h3>
+   <input type='radio' name='shipping' checked>
+    <label>
+    <span>{{delivery|raw}}</span>
+     </label>
+     </div>
+ </section>    
+<h1>Votre commande : ({{recapCart|length}} produits)</h1>
+{% set total = null %}
+{% for prod in recapCart %}
+        <div class='grid4' >
+          <a  href="#" class='imgrecap'><img src="../uploads/attachements/{{prod.produit.attachement}}" alt="{{prod.produit.description}}" class="img-centre"></a>
+           <div class="prod-quantite">
+                  <div>
+	     <h3><a href="#">{{prod.produit.nom }}</a></h3>
+	</div>
+	<div>
+	  <div class='prix'>{{((prod.produit.prix)/ 100)|number_format(2,',','.')}} €</div>
+	</div>
+            </div>
+         </div>
+        
+{% set total = total + (prod.produit.prix * prod.quantity) %}
+{% endfor %}
+ <hr>
+ <ul class="sst">
+ <li>Sous-total : <span>{{(total / 100)|number_format(2,',','.')}} €</span></li>
+ <li>frais de port :<span>{{((transporter.prix)/ 100 )|number_format(2,',','.')}} €</span></li>
+ </ul>
+ <hr>
+<div class='tt'>Total :<span>{{( total / 100 +(transporter.prix)/ 100 )|number_format(2,',','.')}} €</span></div>
+{% if method == 'stripe' %}
+{# {{ path('payment_stripe', {reference: reference})}} #}
+<form method="POST" action="{{ path('payment_stripe', {reference: reference})}}">
+   <button type="submit" class=btn-recap> Payer par stripe le montant de {{( total / 100 +(transporter.prix)/ 100 )|number_format(2,',','.')}} €</button>
+</form>
+{% else %}
+<form method="POST" action="#">
+   <button type="submit" class=btn-recap> Payer par paypal le montant de {{( total / 100 +(transporter.prix)/ 100 )|number_format(2,',','.')}} €</button>
+</form>              
+
+{% endif %}
+</main>
+{% endblock %}

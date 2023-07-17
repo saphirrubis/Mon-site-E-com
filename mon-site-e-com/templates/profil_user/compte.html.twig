@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte  {% endblock %}
+
+{% block body %}
+<h1>Mon compte {{ app.user.username}}</h1>
+<form method="post" class="update">
+       <button class="mb-3">
+          <a href="{{ path('app_logout') }}">Logout</a>
+        </button>
+         <button class="mb-3">
+          <a href="{{ path('cart_index') }}">Mon panier</a>
+        </button>
+<h2>Mes infos personnelles :</h2>
+    <label>Votre  nom :</lable>
+    <input type="text" value="{{app.user.username}}">
+    <label for="inputEmail"> Votre Email :</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" value="{{ app.user.email}}" >
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" >
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+            <button class="btn btn-lg btn-primary" type="submit">
+     Modifier mes informations
+    </button>
+<hr>
+    <h2>Mes adresses :</h2>
+    <label>Le nom de l'adresse :</lable>
+    <input type="text"  name="nom">
+    <label>Votre firstname :</lable>
+    <input type="text" name:'firstname' >
+    <label>Votre lastname:</lable>
+    <input type="text" name:'lastname' >
+     <label>company:</lable>
+    <input type="text" name:'company'>
+      <label>Adresse:</lable>
+    <textaera name="adress"> </textaera>
+      <label>Code posatl :</lable>
+    <input type="number" name="postalcode">
+      <label>Pays :</lable>
+    <input type="text" name='country'>
+      <label>Ville :</lable>
+    <input type="text" name="city">
+      <label>Téléphone:</lable>
+    <input type="number" name="phone">
+
+     <button class="btn btn-lg btn-primary" type="submit">
+     ajouter une adresse
+    </button>
+   
+</form>
+{% endblock %}

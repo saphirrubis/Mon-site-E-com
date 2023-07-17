@@ -13,7 +13,7 @@ img{
 h1{
     text-align: center;
     font-size: 3em;
-    padding-top: 0,5em;
+    margin: 0.5em;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .alert{
@@ -35,6 +35,9 @@ h3{
 }
 ul{
  list-style-type: none;
+}
+li{
+    margin: 0.5em;
 }
  /*pages produits  */
  .produits{
@@ -103,9 +106,8 @@ ul{
 }
 .grid1{
 display: grid;
-grid-template-columns: 2fr;
-grid-template-rows: 2fr;
-
+grid-template-columns: 1fr 1fr;
+grid-template-rows: 1fr 1fr;
 }
 .prod-quantite{
  grid-row: 1;
@@ -170,8 +172,8 @@ grid-template-rows: 1fr;
 }
 .grid2{
     display: grid;
-    grid-template-columns: 3fr;
-    grid-template-rows: 3fr; 
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr; 
     margin-bottom: 2em;
 }
 .accueil{
@@ -194,4 +196,51 @@ grid-template-rows: 1fr;
     position: relative;
     left: 15vw;
    
+}
+/* recap de commande*/
+.recap{
+    width: 50vw; 
+    min-height: 80vh;
+    border: 1.5px solid black;
+    box-shadow: 2px 2px 5px gray; position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.grid3{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+.ad1b{
+    grid-row: 1;
+    grid-column: 1;
+    text-align: center;
+}
+.ad2b{
+    grid-row: 1;
+    grid-column: 2;
+    text-align: center;
+}
+.grid4{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr ;
+    
+    }
+.imgrecap{
+    text-align: center;
+}
+.prix{
+    text-align: center;
+}    
+.sst, .tt{
+    position: relative;
+    left: 62.5%;
+}
+.btn-recap{
+   position: relative;
+   left: 55%;
+   margin: .5em;
+  
 }

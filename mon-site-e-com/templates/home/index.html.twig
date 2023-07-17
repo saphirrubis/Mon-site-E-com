@@ -10,12 +10,15 @@
 
 <div class="example-wrapper">
     <h1> Mon site E-commerce !</h1>
-
+        <button><a href="{{'/logout'}}">deconnexion</a></button>
+        <br>
     Voir mes produits:
     <ul>
         <li> Se connecter :<code><a href="{{ '/login'}}">cliquez-ici</a></code></li>
         <li> S'inscrire :<code><a href="{{ '/inscription'}}">cliquez-ici</a></code></li>
         <li> La boutique :<code><a href="{{ '/boutique'}}">cliquez-ici</a></code></li>
+        <li> Mon panier :<code><a href="{{ '/Mon-panier'}}">cliquez-ici</a></code></li>
+        <li> Mon compte :<code><a href="{{ '/profil/{id<\d+}'}}">cliquez-ici</a></code></li>
         
 </div>
 {% endblock %}
